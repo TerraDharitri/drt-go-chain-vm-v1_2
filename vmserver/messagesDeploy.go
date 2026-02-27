@@ -1,7 +1,7 @@
 package vmserver
 
 import (
-	"io/ioutil"
+	"os"
 
 	vmcommon "github.com/TerraDharitri/drt-go-chain-vm-common"
 )
@@ -32,7 +32,7 @@ func (request *DeployRequest) digest() error {
 	}
 
 	if len(request.CodePath) > 0 {
-		request.Code, err = ioutil.ReadFile(request.CodePath)
+		request.Code, err = os.ReadFile(request.CodePath)
 		if err != nil {
 			return err
 		}

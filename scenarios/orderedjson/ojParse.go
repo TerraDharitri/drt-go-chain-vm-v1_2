@@ -24,7 +24,7 @@ type jsonParserStateMap struct {
 type jsonStateMapKeyValue struct {
 	keyBuffer bytes.Buffer
 	state     int // 0=key, 1=':', 2=value
-	currentKV OJsonKeyValuePair
+	currentKV OJsonKeyValuePair //nolint:unused
 }
 
 type jsonParserStateList struct {

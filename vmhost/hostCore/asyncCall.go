@@ -597,7 +597,7 @@ func (host *vmHost) savePendingAsyncCalls(pendingAsyncMap *vmhost.AsyncContextIn
 /**
  * saveCrossShardCalls goes through the list of async calls and saves the ones that are cross shard
  */
-func (host *vmHost) saveCrossShardCalls(asyncInfo *vmhost.AsyncContextInfo) error {
+func (host *vmHost) saveCrossShardCalls(asyncInfo *vmhost.AsyncContextInfo) error { //nolint:unused
 	crossMap := &vmhost.AsyncContextInfo{
 		CallerAddr:      asyncInfo.CallerAddr,
 		ReturnData:      asyncInfo.ReturnData,

@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"math/big"
 	"math/rand"
+	"os"
 	"strings"
 	"testing"
 
@@ -35,7 +35,7 @@ type fuzzDelegationExecutorInitArgs struct {
 	numBlocksBeforeUnbond       int
 	numDelegators               int
 	stakePerNode                *big.Int
-	numGenesisNodes             int
+	numGenesisNodes             int //nolint:unused
 	totalDelegationCap          *big.Int
 }
 
@@ -69,7 +69,7 @@ func newFuzzDelegationExecutor(fileResolver fr.FileResolver) (*fuzzDelegationExe
 	if err != nil {
 		return nil, err
 	}
-	vmTestExecutor.SetScenariosGasSchedule(mj.GasScheduleV2)
+	err = vmTestExecutor.SetScenariosGasSchedule(mj.GasScheduleV2)
 
 	parser := mjparse.NewParser(fileResolver)
 
@@ -106,7 +106,7 @@ func (pfe *fuzzDelegationExecutor) addStep(step mj.Step) {
 func (pfe *fuzzDelegationExecutor) saveGeneratedScenario() {
 	serialized := mjwrite.ScenarioToJSONString(pfe.generatedScenario)
 
-	err := ioutil.WriteFile("fuzz_gen.scen.json", []byte(serialized), 0644)
+	err := os.WriteFile("fuzz_gen.scen.json", []byte(serialized), 0644)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -271,7 +271,7 @@ func (pfe *fuzzDelegationExecutor) increaseBlockNonce(nonceDelta int) error {
 	return nil
 }
 
-func (pfe *fuzzDelegationExecutor) simpleQuery(funcName string) (*big.Int, error) {
+func (pfe *fuzzDelegationExecutor) simpleQuery(funcName string) (*big.Int, error) { //nolint:unused
 	return pfe.querySingleResult(funcName, "")
 }
 
@@ -314,7 +314,7 @@ func (pfe *fuzzDelegationExecutor) querySingleResult(funcName string, args strin
 	return result, nil
 }
 
-func (pfe *fuzzDelegationExecutor) delegatorQuery(funcName string, delegatorIndex int) (*big.Int, error) {
+func (pfe *fuzzDelegationExecutor) delegatorQuery(funcName string, delegatorIndex int) (*big.Int, error) { //nolint:unused
 	delegatorAddr := fmt.Sprintf(`"''%s"`, string(pfe.delegatorAddress(delegatorIndex)))
 	return pfe.querySingleResult(funcName, delegatorAddr)
 }
@@ -443,7 +443,7 @@ func (pfe *fuzzDelegationExecutor) continueGlobalOperation() error {
 	return nil
 }
 
-func (pfe *fuzzDelegationExecutor) getContractBalance() *big.Int {
+func (pfe *fuzzDelegationExecutor) getContractBalance() *big.Int { //nolint:unused
 	acct := pfe.world.AcctMap.GetAccount(pfe.delegationContractAddress)
 	return acct.Balance
 }

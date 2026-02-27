@@ -164,26 +164,21 @@ func (ae *VMTestExecutor) checkAccountDCDT(expectedAcct *mj.CheckAccount, matchi
 		expectedToken := expectedTokens[tokenName]
 		accountToken := accountTokens[tokenName]
 		if expectedToken == nil {
-			expectedToken = &mj.CheckDCDTData{
-				TokenIdentifier: mj.JSONBytesFromString{
-					Value:    []byte(tokenName),
-					Original: ae.exprReconstructor.Reconstruct([]byte(tokenName), er.StrHint),
-				},
-				Instances: nil,
-				LastNonce: mj.JSONCheckUint64{Value: 0, Original: ""},
-				Roles:     nil,
-			}
-		} else if accountToken == nil {
-			accountToken = &worldmock.MockDCDTData{
+			// Token exists in account but not in expectations - skip check
+			continue
+		}
+		if accountToken == nil {
+			// Expected token but account doesn't have it - check against zero values
+			errors = append(errors, checkTokenState(accountAddress, tokenName, expectedToken, &worldmock.MockDCDTData{
 				TokenIdentifier: []byte(tokenName),
 				Instances:       nil,
 				LastNonce:       0,
 				Roles:           nil,
-			}
+			})...)
 		} else {
 			errors = append(errors, checkTokenState(accountAddress, tokenName, expectedToken, accountToken)...)
 		}
-	}
+		}
 
 	errorString := makeErrorString(errors)
 	if len(errorString) > 0 {

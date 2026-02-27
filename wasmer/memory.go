@@ -2,7 +2,6 @@ package wasmer
 
 import (
 	"fmt"
-	"reflect"
 	"unsafe"
 )
 
@@ -53,14 +52,7 @@ func (memory *Memory) Data() []byte {
 	var length = memory.Length()
 	var data = (*uint8)(cWasmerMemoryData(memory.memory))
 
-	var header reflect.SliceHeader
-	header = *(*reflect.SliceHeader)(unsafe.Pointer(&header))
-
-	header.Data = uintptr(unsafe.Pointer(data))
-	header.Len = int(length)
-	header.Cap = int(length)
-
-	return *(*[]byte)(unsafe.Pointer(&header))
+	return unsafe.Slice(data, length)
 }
 
 // Grow the memory by a number of pages (65kb each).
