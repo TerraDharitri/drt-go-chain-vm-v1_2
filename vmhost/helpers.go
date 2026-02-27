@@ -2,8 +2,8 @@ package vmhost
 
 import (
 	"fmt"
-	"io/ioutil"
 	"math/big"
+	"os"
 	"path/filepath"
 	"unsafe"
 
@@ -89,7 +89,7 @@ func InverseBytes(data []byte) []byte {
 
 // GetSCCode returns the SC code from a given file
 func GetSCCode(fileName string) []byte {
-	code, _ := ioutil.ReadFile(filepath.Clean(fileName))
+	code, _ := os.ReadFile(filepath.Clean(fileName))
 	return code
 }
 

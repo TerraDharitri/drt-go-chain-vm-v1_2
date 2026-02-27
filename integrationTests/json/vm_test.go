@@ -182,7 +182,7 @@ func runTestsInFolder(t *testing.T, folder string, exclusions []string) {
 	}
 }
 
-func runSingleTest(t *testing.T, folder string, filename string) {
+func runSingleTest(t *testing.T, folder string, filename string) { //nolint:unused
 	executor, err := am.NewVMTestExecutor("../../scenarioexec")
 	require.Nil(t, err)
 	runner := mc.NewScenarioRunner(

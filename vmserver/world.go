@@ -68,7 +68,7 @@ func (w *world) deploySmartContract(request DeployRequest) *DeployResponse {
 
 	vmOutput, err := w.vm.RunSmartContractCreate(input)
 	if err == nil {
-		w.blockchainHook.UpdateAccounts(vmOutput.OutputAccounts, nil)
+		err = w.blockchainHook.UpdateAccounts(vmOutput.OutputAccounts, nil)
 	}
 
 	response := &DeployResponse{}
@@ -85,7 +85,7 @@ func (w *world) upgradeSmartContract(request UpgradeRequest) *UpgradeResponse {
 
 	vmOutput, err := w.vm.RunSmartContractCall(input)
 	if err == nil {
-		w.blockchainHook.UpdateAccounts(vmOutput.OutputAccounts, nil)
+		err = w.blockchainHook.UpdateAccounts(vmOutput.OutputAccounts, nil)
 	}
 
 	response := &UpgradeResponse{}
@@ -101,7 +101,7 @@ func (w *world) runSmartContract(request RunRequest) *RunResponse {
 
 	vmOutput, err := w.vm.RunSmartContractCall(input)
 	if err == nil {
-		w.blockchainHook.UpdateAccounts(vmOutput.OutputAccounts, nil)
+		err = w.blockchainHook.UpdateAccounts(vmOutput.OutputAccounts, nil)
 	}
 
 	response := &RunResponse{}

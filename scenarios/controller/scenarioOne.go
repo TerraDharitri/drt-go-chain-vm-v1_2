@@ -1,7 +1,7 @@
 package scencontroller
 
 import (
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 
@@ -28,7 +28,7 @@ func (r *ScenarioRunner) RunSingleJSONScenario(contextPath string) error {
 	// defer the closing of our jsonFile so that we can parse it later on
 	defer jsonFile.Close()
 
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
 		return err
 	}
@@ -44,14 +44,14 @@ func (r *ScenarioRunner) RunSingleJSONScenario(contextPath string) error {
 
 // tool to modify scenarios
 // use with extreme caution
-func saveModifiedScenario(toPath string, scenario *mj.Scenario) {
+func saveModifiedScenario(toPath string, scenario *mj.Scenario) { //nolint:unused
 	resultJSON := mjwrite.ScenarioToJSONString(scenario)
 
 	err := os.MkdirAll(filepath.Dir(toPath), os.ModePerm)
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile(toPath, []byte(resultJSON), 0644)
+	err = os.WriteFile(toPath, []byte(resultJSON), 0644)
 	if err != nil {
 		panic(err)
 	}

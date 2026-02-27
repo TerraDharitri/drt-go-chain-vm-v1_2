@@ -1,7 +1,7 @@
 package scencontroller
 
 import (
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -29,7 +29,7 @@ func (r *TestRunner) RunSingleJSONTest(contextPath string) error {
 	// defer the closing of our jsonFile so that we can parse it later on
 	defer jsonFile.Close()
 
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
 		return err
 	}
@@ -52,7 +52,7 @@ func (r *TestRunner) RunSingleJSONTest(contextPath string) error {
 
 // tool to convert .test.json -> .scen.json
 // use with extreme caution
-func convertTestToScenario(contextPath string, top []*mj.Test) {
+func convertTestToScenario(contextPath string, top []*mj.Test) { //nolint:unused
 	if strings.HasSuffix(contextPath, ".test.json") {
 		scenario, err := mj.ConvertTestToScenario(top)
 		if err != nil {
@@ -66,7 +66,7 @@ func convertTestToScenario(contextPath string, top []*mj.Test) {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(newPath, []byte(scenarioSerialized), 0644)
+		err = os.WriteFile(newPath, []byte(scenarioSerialized), 0644)
 		if err != nil {
 			panic(err)
 		}
@@ -75,14 +75,14 @@ func convertTestToScenario(contextPath string, top []*mj.Test) {
 
 // tool to modify tests
 // use with extreme caution
-func saveModifiedTest(toPath string, top []*mj.Test) {
+func saveModifiedTest(toPath string, top []*mj.Test) { //nolint:unused
 	resultJSON := mjwrite.TestToJSONString(top)
 
 	err := os.MkdirAll(filepath.Dir(toPath), os.ModePerm)
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile(toPath, []byte(resultJSON), 0644)
+	err = os.WriteFile(toPath, []byte(resultJSON), 0644)
 	if err != nil {
 		panic(err)
 	}

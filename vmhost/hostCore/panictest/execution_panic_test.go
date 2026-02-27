@@ -13,8 +13,7 @@ func TestExecution_PanicInGoWithSilentWasmer_SIGSEGV(t *testing.T) {
 	host, blockchain := hostCore.DefaultTestVMForCallSigSegv(t, code, big.NewInt(1), true)
 
 	blockchain.GetStorageDataCalled = func(_ []byte, _ []byte) ([]byte, uint32, error) {
-		var i *int
-		i = nil
+		i := (*int)(nil)
 
 		// dereference a nil pointer
 		*i = *i + 1

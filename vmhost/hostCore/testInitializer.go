@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"math/big"
 	"os"
 	"os/exec"
@@ -50,7 +49,7 @@ func MakeTestSCAddress(identifier string) []byte {
 
 // GetSCCode retrieves the bytecode of a WASM module from a file
 func GetSCCode(fileName string) []byte {
-	code, err := ioutil.ReadFile(filepath.Clean(fileName))
+	code, err := os.ReadFile(filepath.Clean(fileName))
 	if err != nil {
 		panic(fmt.Sprintf("GetSCCode(): %s", fileName))
 	}

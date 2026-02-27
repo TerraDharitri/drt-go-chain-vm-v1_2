@@ -15,10 +15,10 @@ func TestAddUint64(t *testing.T) {
 	require.Equal(t, uint64(math.MaxUint64-1), sum)
 
 	c := uint64(3)
-	sum, err = AddUint64WithErr(b, c)
+	_, err = AddUint64WithErr(b, c)
 	require.Equal(t, ErrAdditionOverflow, err)
 
 	d := uint64(0)
-	sum, err = AddUint64WithErr(b, d)
+	_, err = AddUint64WithErr(b, d)
 	require.Nil(t, err)
 }
