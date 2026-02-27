@@ -70,6 +70,9 @@ func newFuzzDelegationExecutor(fileResolver fr.FileResolver) (*fuzzDelegationExe
 		return nil, err
 	}
 	err = vmTestExecutor.SetScenariosGasSchedule(mj.GasScheduleV2)
+	if err != nil {
+		return nil, err
+	}
 
 	parser := mjparse.NewParser(fileResolver)
 
