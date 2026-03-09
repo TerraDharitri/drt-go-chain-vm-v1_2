@@ -5,6 +5,8 @@ github.com/TerraDharitri/drt-go-chain-core v1.0.1 h1:k0B3DZNYJwE/NmibEQBVi/TxDm5
 github.com/TerraDharitri/drt-go-chain-core v1.0.1/go.mod h1:dppf7NEpCEr/YrKYrRCnyVLsehIVnXSWMU4cikdL2/Q=
 github.com/TerraDharitri/drt-go-chain-crypto v1.0.0 h1:WxdvBkBt/kuUzofzFKYIZLok/otu51mD2iFCCnXadmQ=
 github.com/TerraDharitri/drt-go-chain-crypto v1.0.0/go.mod h1:viKoiLEX6j8l9X4ByoxA/v+9PKlH97qTQPkgaWUJxvQ=
+github.com/TerraDharitri/drt-go-chain-crypto v1.0.1 h1:kSfVue6EEF41W6MO2TJuaBe448Fpqsyq2/ILvTGaUpQ=
+github.com/TerraDharitri/drt-go-chain-crypto v1.0.1/go.mod h1:viKoiLEX6j8l9X4ByoxA/v+9PKlH97qTQPkgaWUJxvQ=
 github.com/TerraDharitri/drt-go-chain-logger v1.0.0 h1:JU7F0+DLrdV6mNXemd5RzyQcsy/QKCIrhSkvmoeHA9Y=
 github.com/TerraDharitri/drt-go-chain-logger v1.0.0/go.mod h1:5I5eJbzcpPswHIWc1oZXLzlvE3YWJ2S8nzmKZ8CeMm0=
 github.com/TerraDharitri/drt-go-chain-vm-common v1.0.0 h1:NdUhj5A3vdWRHiylNrG1bJINjNRt5ktbgYFYtbrb/8M=

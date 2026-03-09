@@ -1,4 +1,4 @@
-.PHONY: test test-short build vmserver clean
+.PHONY: test test-short build vmserver clean lint lint-install lint-run
 
 VM_VERSION := $(shell git describe --tags --long --dirty --always)
 
@@ -7,6 +7,16 @@ clean:
 
 build:
 	go build ./...
+
+lint-install:
+	@echo "Installing golangci-lint..."
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(shell go env GOPATH)/bin v1.64.5
+	@echo "golangci-lint installed successfully"
+
+lint:
+	golangci-lint run --timeout 10m0s --max-issues-per-linter 0 --max-same-issues 0 --print-issued-lines
+
+lint-run: lint
 
 vmserver:
 ifndef VMSERVER_PATH
